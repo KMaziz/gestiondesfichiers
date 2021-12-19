@@ -1,0 +1,51 @@
+  <!--MDB Tables-->
+  <div class="container mt-4">
+
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-12">
+                    <h2 class="pt-3 pb-4 text-center font-bold font-up danger-text">liste des fichiers</h2>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+            <table class="table table-bordered red-border text-center">
+                <thead>
+                    <tr>
+                        <th>Nom du fichier</th>
+                        <th>Taille (Bytes)</th>
+                        <th>Lien</th>
+                        <th>Catégorie</th>
+                        <th>Sous catégorie </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let file of listfile" >
+                        <td>{{file.fileName}}</td>
+                        <td>{{file.size}}</td>
+                        <td><a href="{{file.fileDownloadUri}}">{{file.fileDownloadUri}}</a></td>
+                        <td>{{file.subCategory?.category?.name}}</td>
+                        <td>{{file.subCategory?.name}}</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <hr class="my-4">
+
+
+
+</div>
+

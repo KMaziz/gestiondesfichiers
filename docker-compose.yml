@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: mongo.dockerfile
+    expose:
+      - "27017"
+    networks:
+      - app-network
+
+  gestion_des_fichiers:
+    restart: always
+    container_name: gestion_des_fichiers
+    build:
+      context: ./backend/gestion_des_fichiers
+      dockerfile: Dockerfile
+    expose:
+      - "8090"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+
+  nginx:
+    restart: always
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    links:
+           - "gestion_des_fichiers"
+    depends_on:
+           - "gestion_des_fichiers"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
